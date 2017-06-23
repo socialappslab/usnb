@@ -88,4 +88,6 @@ You can contribute by:
 
 ### Who do I talk to? ###
 
-* Rafael Angarita: rafael.angarita@inria.fr
+* Rafael Angarita: rafael.angarita AT inria.fr (main developer)
+* Nikolaos Georgantas nikolaos.georgantas AT inria.fr (designer)
+* Valérie Issarny valerie.issarny AT inria.fr (designer)
