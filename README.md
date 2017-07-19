@@ -115,8 +115,8 @@ Create an event:
 
 ```
 curl -X POST -H "Content-Type: application/json"  -d '{
-"eventId": "myEvent",
-"title": "One great event"
+    "eventId": "myEvent",
+    "title": "One great event"
 }' "http://localhost:3025/events"
 ```
 
@@ -124,8 +124,8 @@ Create a subscription for our user:
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{ 
-"eventId": "myEvent", 
-"alertEndpoint": "user@universe.u"
+    "eventId": "myEvent", 
+    "alertEndpoint": "user@universe.u"
 }' "http://localhost:3025/subscriptions"
 ```
 
@@ -151,15 +151,15 @@ Facebook Messenger subscription to our event:
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{ 
-"eventId": "myEvent", 
-"alertEndpoint": "user@universe.u", 
-"endpointType" : "email",
+    "eventId": "myEvent", 
+    "alertEndpoint": "user@universe.u", 
+    "endpointType" : "email",
 }' "http://localhost:3025/subscriptions"
 
 curl -X POST -H "Content-Type: application/json" -d '{ 
-"eventId": "myEvent", 
-"alertEndpoint": "user@universe.u", 
-"endpointType" : "facebookmessengerbot",
+    "eventId": "myEvent", 
+    "alertEndpoint": "user@universe.u", 
+    "endpointType" : "facebookmessengerbot",
 }' "http://localhost:3025/subscriptions"
 ```
 
