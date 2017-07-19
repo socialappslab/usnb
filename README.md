@@ -42,8 +42,7 @@ Suppose API Gateway location is http://localhost:3025 for the following examples
 Register a user:
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '
-{
+curl -X POST -H "Content-Type: application/json" -d '{
     "userId": "user@universe.u",
     "name": "Test User"
 }' "http://localhost:3025/users"
@@ -52,8 +51,7 @@ curl -X POST -H "Content-Type: application/json" -d '
 Register social interaction services identities for that user:
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '
-{
+curl -X POST -H "Content-Type: application/json" -d '{
     "userId": "user@universe.u",
     "serviceId": "facebookmessengerbot",
     "identity": "184858454541",
@@ -61,8 +59,7 @@ curl -X POST -H "Content-Type: application/json" -d '
 }' "http://localhost:3025/identities"
 
 
-curl -X POST -H "Content-Type: application/json" -d '
-{
+curl -X POST -H "Content-Type: application/json" -d '{
     "userId": "user@universe.u",
     "serviceId": "email",
     "identity": "user@universe.u",
@@ -77,8 +74,7 @@ or the [account linking](https://developers.facebook.com/docs/messenger-platform
 Set the preferred social interaction for that user:
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '
-{
+curl -X POST -H "Content-Type: application/json" -d '{
     "userId": "user@universe.u",
     "serviceId": "facebookmessengerbot"
 }' "http://localhost:3025/preferences"
@@ -87,8 +83,7 @@ curl -X POST -H "Content-Type: application/json" -d '
 Change it:
 
 ```
-curl -X PUT -H "Content-Type: application/json" -d '
-{
+curl -X PUT -H "Content-Type: application/json" -d '{
     "serviceId": "email"
 }' "http://localhost:3025/preferences/user@universe.u"
 ```
@@ -137,7 +132,6 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "title": "This is the title of the signal", 
     "text": "this is the body of the signal", 
     "instancedata": "User defined metadata"
-    
 }' "http://localhost:3025/signals"
 ```
 
@@ -178,7 +172,6 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "text": "this is the body of the signal", 
     "instancedata": "User defined metadata",
     "filterBy": "email"
-    
 }' "http://localhost:3025/signals"
 ```
 
