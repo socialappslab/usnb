@@ -1,12 +1,13 @@
-# The Universal Social Network Bus (USNB)#
-### A USNB notification instance for AppCivist-PB ###
+# Universal Social Network Bus (USNB)#
 
-The USNB is a set of service components. You can use one or more of the following service components according to your needs:
+USNB is a set of service components. You can use one or more of the following service components according to your needs:
 
-* [API Gateway](https://bitbucket.org/USNB-A/api-gateway)
-* [Entity Manager](https://bitbucket.org/USNB-A/entity-manager)
-* [Facebook Binding Component](https://bitbucket.org/USNB-A/facebook-bindingcomponent)
-* [Email Binding Component](https://bitbucket.org/USNB-A/email-bindingcomponent)
+* [API Gateway](https://gitlab.inria.fr/usnb/api-gateway)
+* [Entity Manager](https://gitlab.inria.fr/usnb/entity-manager)
+* [Message Transformer](https://gitlab.inria.fr/usnb/message-transformer)
+* [Facebook Binding Component (No Messenger Platform)](https://gitlab.inria.fr/usnb/facebook-bc)
+* [Facebook Binding Component (Messenger Platform)](https://gitlab.inria.fr/usnb/facebook-bc-bot-appcivist)
+* [Email Binding Component](https://gitlab.inria.fr/usnb/email-bc)
 
 This README contains the necessary steps to get the USNB up and running.
 
@@ -29,53 +30,161 @@ You just have to configure these scripts according to your environment. When you
 
 There is also [another file](Link URL) containing all the required environment variables of all components if you don't want to use pm2.
 
-### Usage ###
+## Usage ##
 
-You will interact with the [API Gateway](https://bitbucket.org/USNB-A/api-gateway) service. 
+You will interact with the [API Gateway](https://gitlab.inria.fr/usnb/api-gateway) service. 
 
-Example usage supposing your API Gateway service location is http://localhost:3025:
+Suppose API Gateway location is http://localhost:3025 for the following examples.
+
+
+### Entity Management ###
+
+Register a user:
+
+```
+curl -X POST -H "Content-Type: application/json" -d '
+{
+    "userId": "user@universe.u",
+    "name": "Test User"
+}' "http://localhost:3025/users"
+```
+
+Register social interaction services identities for that user:
+
+```
+curl -X POST -H "Content-Type: application/json" -d '
+{
+    "userId": "user@universe.u",
+    "serviceId": "facebookmessengerbot",
+    "identity": "184858454541",
+    "enabled": true
+}' "http://localhost:3025/identities"
+
+
+curl -X POST -H "Content-Type: application/json" -d '
+{
+    "userId": "user@universe.u",
+    "serviceId": "email",
+    "identity": "user@universe.u",
+    "enabled": true
+}' "http://localhost:3025/identities"
+```
+
+In the case of Facebook Messenger, it will be the bot itself who will register
+the Facebook Messenger identity following [checkbox plugin](https://developers.facebook.com/docs/messenger-platform/plugin-reference/checkbox-plugin)
+or the [account linking](https://developers.facebook.com/docs/messenger-platform/account-linking/v2.10) processes.
+
+Set the preferred social interaction for that user:
+
+```
+curl -X POST -H "Content-Type: application/json" -d '
+{
+    "userId": "user@universe.u",
+    "serviceId": "facebookmessengerbot"
+}' "http://localhost:3025/preferences"
+```
+
+Change it:
+
+```
+curl -X PUT -H "Content-Type: application/json" -d '
+{
+    "serviceId": "email"
+}' "http://localhost:3025/preferences/user@universe.u"
+```
+
+### Direct Messaging ###
+
+Send a direct message to our user:
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{
+  "to": {
+    "name": "user@universe.u"
+  },
+  "message": {
+    "text": "Are you there?"
+  }
+}' "http://localhost:3025/messages"
+
+```
+
+### Events, Subscriptions and Indirect Messaging ###
 
 Create an event:
 
-
 ```
-#!command
-
-curl -X POST http://localhost:3025/events -H "Content-Type: application/json"  -d '{"title": "test", "eventId": "153f8576-7208-41b6-affd-32795f06dca5_NEW_CONTRIBUTION_IDEA"}'
-
-```
-
-Create one email and one Facebook Messenger subscription to that event:
-
-
-```
-#!command
-
-curl -X POST http://localhost:3025/subscriptions -H "Content-Type: application/json" -d '{ "eventId": "153f8576-7208-41b6-affd-32795f06dca5_NEW_CONTRIBUTION_IDEA", "alertEndpoint": "johnatinria@gmail.com", "endpointType" : "email"}'
-curl -X POST http://localhost:3025/subscriptions -H "Content-Type: application/json" -d '{ "eventId": "153f8576-7208-41b6-affd-32795f06dca5_NEW_CONTRIBUTION_IDEA", "alertEndpoint": "carmenatinria", "endpointType" : "facebookmessenger"}'
+curl -X POST -H "Content-Type: application/json"  -d '{
+"eventId": "myEvent",
+"title": "One great event"
+}' "http://localhost:3025/events"
 ```
 
-Send a signal for that event:
+Create a subscription for our user:
 
 ```
-#!command
-
-curl -X POST http://localhost:3025/signals -H "Content-Type: application/json" -d '{ "eventId": "153f8576-7208-41b6-affd-32795f06dca5_NEW_CONTRIBUTION_IDEA", "title": "This is the title of the signal", "text": "this is the body of the signal", "instancedata": "An instance of event(12345_new_campaign) has happened"}'
-
+curl -X POST -H "Content-Type: application/json" -d '{ 
+"eventId": "myEvent", 
+"alertEndpoint": "user@universe.u"
+}' "http://localhost:3025/subscriptions"
 ```
 
-You can send the signal only to subscriptions using a certain service in the 'filterBy' option; for example, send the signal only to subscriptions using Facebook Messenger:
+Send an indirect message to users subscribed to 'myEvent':
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{
+    "eventId": "myEvent", 
+    "title": "This is the title of the signal", 
+    "text": "this is the body of the signal", 
+    "instancedata": "User defined metadata"
+    
+}' "http://localhost:3025/signals"
+```
+
+In this example, 'user@universe.u' will receive the message through the
+social interaction service specified in: 'http://localhost:3025/preferences/user@universe.u'
+
+If it's **really necessary**, you can associate a subscription to a particular
+social interaction service; for example, you can create one email and one 
+Facebook Messenger subscription to our event:
 
 
 ```
-#!command
+curl -X POST -H "Content-Type: application/json" -d '{ 
+"eventId": "myEvent", 
+"alertEndpoint": "user@universe.u", 
+"endpointType" : "email",
+}' "http://localhost:3025/subscriptions"
 
-curl -X POST http://localhost:3025/signals -H "Content-Type: application/json" -d '{ "eventId": "153f8576-7208-41b6-affd-32795f06dca5_NEW_CONTRIBUTION_IDEA", "title": "This is the title of the signal", "text": "this is the body of the signal", "filterBy": "facebookmessenger", "instancedata": "An instance of event(12345_new_campaign) has happened"}'
+curl -X POST -H "Content-Type: application/json" -d '{ 
+"eventId": "myEvent", 
+"alertEndpoint": "user@universe.u", 
+"endpointType" : "facebookmessengerbot",
+}' "http://localhost:3025/subscriptions"
+```
+
+In this case, user 'user@universe.u' will receive the same message by both email
+and Facebook Messenger.
+
+You can send the message only to users subscribed using a certain service using 
+the 'filterBy' option; for example, send the signal only to subscriptions using 
+email:
 
 
 ```
+curl -X POST -H "Content-Type: application/json" -d '{
+    "eventId": "myEvent", 
+    "title": "This is the title of the signal", 
+    "text": "this is the body of the signal", 
+    "instancedata": "User defined metadata",
+    "filterBy": "email"
+    
+}' "http://localhost:3025/signals"
+```
 
-
+The 'filterBy' option has no effect if there are users subscribed to the 
+corresponding event without social interaction services explicetily associated
+to that subscription.
 
 
 ### Contribution guidelines ###
