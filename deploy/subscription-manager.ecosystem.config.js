@@ -7,7 +7,7 @@ module.exports = {
 
         // First application
         {
-            name: 'entity-manager',
+            name: 'subscription-manager',
             script: 'server.js',
             /*env: {
               COMMON_VARIABLE: 'true'
@@ -25,11 +25,11 @@ module.exports = {
     deploy: {
         production: {
             user: '',
-            host: '',
+            host: 'localhost',
             ref: 'origin/master',
-            repo: 'https://gitlab.inria.fr/usnb/entity-manager',
-            path: '/path/to/local/production/deployment/directory/entity-manager',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/subscription-manager.ecosystem.config.js --env dev',
+            repo: 'https://gitlab.inria.fr/usnb/subscription-manager',
+            path: '/path/to/local/production/deployment/directory/subscription-manager',
+            'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/subscription-manager.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'production',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
@@ -41,9 +41,9 @@ module.exports = {
             user: '',
             host: 'localhost',
             ref: 'origin/master',
-            repo: 'https://gitlab.inria.fr/usnb/entity-manager',
-            path: '/path/to/local/development/deployment/directory/entity-manager',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/subscription-manager.ecosystem.config.js --env dev',
+            repo: 'https://gitlab.inria.fr/usnb/subscription-manager',
+            path: '/path/to/local/development/deployment/directory/subscription-manager',
+            'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/subscription-manager.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',

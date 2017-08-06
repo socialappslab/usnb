@@ -25,11 +25,11 @@ module.exports = {
     deploy: {
         production: {
             user: '',
-            host: '',
+            host: 'localhost',
             ref: 'origin/master',
             repo: 'https://gitlab.inria.fr/usnb/facebook-bindingcomponent',
             path: '/path/to/local/production/deployment/directory/facebook-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/facebook-bindingcomponent.ecosystem.config.js --env dev',
+            'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/facebook-bindingcomponent.ecosystem.config.js --env dev',
 
             env: {
                 NODE_ENV: 'production',
@@ -48,7 +48,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'https://gitlab.inria.fr/usnb/facebook-bindingcomponent',
             path: '/path/to/local/development/deployment/directory/facebook-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/facebook-bindingcomponent.ecosystem.config.js --env dev',
+            'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/facebook-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
 

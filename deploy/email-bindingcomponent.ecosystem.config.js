@@ -25,11 +25,11 @@ module.exports = {
     deploy: {
         production: {
             user: '',
-            host: '',
+            host: 'localhost',
             ref: 'origin/master',
             repo: 'https://gitlab.inria.fr/usnb/email-bindingcomponent',
             path: '/path/to/local/production/deployment/directory/email-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
+            'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'production',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
@@ -47,7 +47,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'https://gitlab.inria.fr/usnb/email-bindingcomponent',
             path: '/path/to/local/development/deployment/directory/email-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
+            'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
