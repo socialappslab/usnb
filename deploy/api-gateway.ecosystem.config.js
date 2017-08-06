@@ -7,8 +7,8 @@ module.exports = {
 
         // First application
         {
-            name: 'entity-manager',
-            script: 'server.js',
+            name: 'api-gateway',
+            script: 'start.js',
             /*env: {
               COMMON_VARIABLE: 'true'
             },
@@ -27,14 +27,14 @@ module.exports = {
             user: '',
             host: '',
             ref: 'origin/master',
-            repo: 'https://gitlab.inria.fr/usnb/entity-manager',
-            path: '/path/to/local/production/deployment/directory/entity-manager',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/production/deployment/directory/entity-manager.ecosystem.config.js --env dev',
+            repo: 'https://gitlab.inria.fr/usnb/api-gateway',
+            path: '/path/to/local/production/deployment/directory/api-gateway',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/production/deployment/directory/api-gateway.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'production',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
-                USNB_ENTITY_MANAGER_PORT: 3024,
-                USNB_MONGO_URI_ENTITY_MANAGER: 'mongodb://localhost:27017/entitymanager',
+                USNB_API_GATEWAY_PORT: 3025,
+                USNB_MONGO_URI_NOTIFICATIONS: 'mongodb://localhost:27017/notificationservice',
             }
         },
         dev: {
@@ -42,13 +42,13 @@ module.exports = {
             host: 'localhost',
             ref: 'origin/master',
             repo: 'https://gitlab.inria.fr/usnb/entity-manager',
-            path: '/path/to/local/development/deployment/directory/entity-manager',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/development/deployment/directory/entity-manager.ecosystem.config.js --env dev',
+            path: '/path/to/local/development/deployment/directory/api-gateway',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/development/deployment/directory/api-gateway.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
-                USNB_ENTITY_MANAGER_PORT: 3024,
-                USNB_MONGO_URI_ENTITY_MANAGER: 'mongodb://localhost:27017/entitymanager',
+                USNB_API_GATEWAY_PORT: 3025,
+                USNB_MONGO_URI_NOTIFICATIONS: 'mongodb://localhost:27017/notificationservice',
             }
         }
     }

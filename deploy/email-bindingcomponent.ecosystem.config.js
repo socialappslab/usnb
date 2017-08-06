@@ -27,14 +27,12 @@ module.exports = {
             user: '',
             host: '',
             ref: 'origin/master',
-            repo: 'https://bitbucket.org/USNB-A/email-bindingcomponent',
-            path: '/var/www/development/email-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://bitbucket.org/USNB-A/message-transformer && pm2 reload /Users/rangarit/workspace/deployment/email-bindingcomponent.ecosystem.config.js --env dev',
+            repo: 'https://gitlab.inria.fr/usnb/email-bindingcomponent',
+            path: '/path/to/local/production/deployment/directory/email-bindingcomponent',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/production/deployment/directory/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'production',
-
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
-
                 USNB_EMAIL_PERSONA_PORT: 3026,
                 USNB_EMAIL_HOST: 'smtp.gmail.com',
                 USNB_EMAIL_PORT: 465,
@@ -47,14 +45,12 @@ module.exports = {
             user: 'rangarit',
             host: 'localhost',
             ref: 'origin/master',
-            repo: 'https://bitbucket.org/USNB-A/email-bindingcomponent',
-            path: '/var/www/development/email-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://bitbucket.org/USNB-A/message-transformer && pm2 reload /Users/rangarit/workspace/deployment/email-bindingcomponent.ecosystem.config.js --env dev',
+            repo: 'https://gitlab.inria.fr/usnb/email-bindingcomponent',
+            path: '/path/to/local/development/deployment/directory/email-bindingcomponent',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/development/deployment/directory/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
-
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
-
                 USNB_EMAIL_PERSONA_PORT: 3026,
                 USNB_EMAIL_HOST: 'smtp.gmail.com',
                 USNB_EMAIL_PORT: 465,

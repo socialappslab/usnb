@@ -2,12 +2,16 @@
 
 USNB is a set of service components. You can use one or more of the following service components according to your needs:
 
-* [API Gateway](https://gitlab.inria.fr/usnb/api-gateway)
-* [Entity Manager](https://gitlab.inria.fr/usnb/entity-manager)
-* [Message Transformer](https://gitlab.inria.fr/usnb/message-transformer)
-* [Facebook Binding Component (No Messenger Platform)](https://gitlab.inria.fr/usnb/facebook-bc)
-* [Facebook Binding Component (Messenger Platform)](https://gitlab.inria.fr/usnb/facebook-bc-bot-appcivist)
-* [Email Binding Component](https://gitlab.inria.fr/usnb/email-bc)
+* [API Gateway](https://gitlab.inria.fr/usnb/api-gateway): API proxy to all others. 
+* [Entity Manager](https://gitlab.inria.fr/usnb/entity-manager): manages users and identities. 
+* [Subscription Manager](https://gitlab.inria.fr/usnb/message-transformer): manages notifications based on subscriptions to events that are signaled from an external system.   
+* [Message Transformer](https://gitlab.inria.fr/usnb/message-transformer): transforms messages for each binding component
+* [Facebook Binding Component (No Messenger Platform)](https://gitlab.inria.fr/usnb/facebook-bc): sends messages to facebook
+* [Facebook Binding Component (Messenger Platform)](https://gitlab.inria.fr/usnb/facebook-bc-bot-appcivist): sends messages to facebook using messenger platform
+* [Email Binding Component](https://gitlab.inria.fr/usnb/email-bc): send messages via emails
+
+![Components of the Universal Social Network Bus ](https://drive.google.com/file/d/0B7ShzcEnCJFNeWpuT25jS21DdUE/view?usp=sharing)
+
 
 This README contains the necessary steps to get the USNB up and running.
 
@@ -23,7 +27,24 @@ If you want to use all available USNB components, you have to install the follow
 ### Deployment ###
 
 You can deploy the USNB components using whatever method you prefer; however, we recommend using the [pm2](http://pm2.keymetrics.io/docs/usage/quick-start/) process manager for node.js. You can find in the folder *deploy* scripts for each one of the available components and a script to run them all called *deploy.sh*. 
-You just have to configure these scripts according to your environment. When you deploy all components, you should see them running in pm2:
+
+You just have to configure these scripts according to your environment. When you deploy all components, you should see them running in pm2.
+
+1. Make a copy of the `deploy` folder under the `deploy_X` (e.g., `deploy_local`). Every `deploy_*` is ignored by git. 
+2. Replace `/path/to/local/production/deployment/directory/` and `/path/to/local/development/deployment/directory/` with the paths of your local production and development directories. Make sure your user has write access in these directories. The deploy script will automatically clone each component into it before running the scripts. 
+3. Modify each `*.ecosystem.config.js` script with credential details (email, facebook, etc.)
+4. Make also sure of updating the `'post-deploy'` variable of each initialization script to correctly point out to your local deployment folders and initialization scripts. 
+5. Run `deploy.sh` specifying the environment as a parameter (`dev`, `production`)
+
+```
+$ ./deploy.hs dev
+```
+
+5. Check that all components are running via `pm2`:
+
+```sh
+$ pm2 list
+```
 
 ![Screen Shot 2017-06-15 at 16.08.57.png](https://bitbucket.org/repo/XX5zzkb/images/1938485544-Screen%20Shot%202017-06-15%20at%2016.08.57.png)
 

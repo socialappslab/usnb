@@ -29,12 +29,12 @@ module.exports = {
             ref: 'origin/master',
             repo: 'https://gitlab.inria.fr/usnb/entity-manager',
             path: '/path/to/local/production/deployment/directory/entity-manager',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/production/deployment/directory/entity-manager.ecosystem.config.js --env dev',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/production/deployment/directory/subscription-manager.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'production',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
-                USNB_ENTITY_MANAGER_PORT: 3024,
-                USNB_MONGO_URI_ENTITY_MANAGER: 'mongodb://localhost:27017/entitymanager',
+                USNB_NOTIFICATIONS_PORT: 3023,
+                USNB_MONGO_URI_NOTIFICATIONS: 'mongodb://localhost:27017/notificationservice',
             }
         },
         dev: {
@@ -43,12 +43,12 @@ module.exports = {
             ref: 'origin/master',
             repo: 'https://gitlab.inria.fr/usnb/entity-manager',
             path: '/path/to/local/development/deployment/directory/entity-manager',
-            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/development/deployment/directory/entity-manager.ecosystem.config.js --env dev',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/development/deployment/directory/subscription-manager.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
                 RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
-                USNB_ENTITY_MANAGER_PORT: 3024,
-                USNB_MONGO_URI_ENTITY_MANAGER: 'mongodb://localhost:27017/entitymanager',
+                USNB_NOTIFICATIONS_PORT: 3023,
+                USNB_MONGO_URI_NOTIFICATIONS: 'mongodb://localhost:27017/notificationservice',
             }
         }
     }

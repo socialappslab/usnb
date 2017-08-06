@@ -27,9 +27,9 @@ module.exports = {
             user: '',
             host: '',
             ref: 'origin/master',
-            repo: 'https://bitbucket.org/USNB-A/facebook-bindingcomponent',
-            path: '/var/www/production/facebook-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://bitbucket.org/USNB-A/message-transformer && pm2 reload facebook-bindingcomponent.ecosystem.config.js --env dev',
+            repo: 'https://gitlab.inria.fr/usnb/facebook-bindingcomponent',
+            path: '/path/to/local/production/deployment/directory/facebook-bindingcomponent',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/production/deployment/directory/facebook-bindingcomponent.ecosystem.config.js --env dev',
 
             env: {
                 NODE_ENV: 'production',
@@ -46,9 +46,9 @@ module.exports = {
             user: '',
             host: 'localhost',
             ref: 'origin/master',
-            repo: 'https://bitbucket.org/USNB-A/facebook-bindingcomponent',
-            path: '/var/www/development/facebook-bindingcomponent',
-            'post-deploy': 'npm install && npm install https://bitbucket.org/USNB-A/message-transformer && pm2 reload facebook-bindingcomponent.ecosystem.config.js --env dev',
+            repo: 'https://gitlab.inria.fr/usnb/facebook-bindingcomponent',
+            path: '/path/to/local/development/deployment/directory/facebook-bindingcomponent',
+            'post-deploy': 'npm install && npm install https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/development/deployment/directory/facebook-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
 
