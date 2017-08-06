@@ -31,10 +31,11 @@ You can deploy the USNB components using whatever method you prefer; however, we
 You just have to configure these scripts according to your environment. When you deploy all components, you should see them running in pm2.
 
 1. Make a copy of the `deploy` folder under the `deploy_X` (e.g., `deploy_local`). Every `deploy_*` is ignored by git. 
-2. Replace `/path/to/local/production/deployment/directory/` and `/path/to/local/development/deployment/directory/` with the paths of your local production and development directories. Make sure your user has write access in these directories. The deploy script will automatically clone each component into it before running the scripts. 
-3. Modify each `*.ecosystem.config.js` script with credential details (email, facebook, etc.)
-4. Make also sure of updating the `'post-deploy'` variable of each initialization script to correctly point out to your local deployment folders and initialization scripts. 
-5. Run `deploy.sh` specifying the environment as a parameter (`dev`, `production`)
+2. Modify each `*.ecosystem.config.js` script with credential details (email, facebook, etc.)
+3. Replace `/path/to/local/production/deployment/directory/` and `/path/to/local/development/deployment/directory/` with the paths of your local production and development directories. Make sure your user has write access in these directories. The deploy script will automatically clone each component into it before running the scripts. 
+4. Replace `/path/to/loca/deploy` with the path to your local version of the deploy directory.
+5. Make also sure of updating the `'post-deploy'` variable of each initialization script to correctly point out to your local deployment folders and initialization scripts. 
+6. Run `deploy.sh` specifying the environment as a parameter (`dev`, `production`)
 
 ```
 $ ./deploy.hs dev
