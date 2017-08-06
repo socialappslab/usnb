@@ -8,7 +8,7 @@ module.exports = {
         // First application
         {
             name: 'entity-manager',
-            script: 'server.js',
+            script: 'start.js',
             /*env: {
               COMMON_VARIABLE: 'true'
             },

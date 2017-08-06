@@ -27,7 +27,7 @@ module.exports = {
             user: '',
             host: 'localhost',
             ref: 'origin/master',
-            repo: 'https://gitlab.inria.fr/usnb/email-bindingcomponent',
+            repo: 'https://gitlab.inria.fr/usnb/email-bc',
             path: '/path/to/local/production/deployment/directory/email-bindingcomponent',
             'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
@@ -45,7 +45,7 @@ module.exports = {
             user: 'rangarit',
             host: 'localhost',
             ref: 'origin/master',
-            repo: 'https://gitlab.inria.fr/usnb/email-bindingcomponent',
+            repo: 'https://gitlab.inria.fr/usnb/email-bc',
             path: '/path/to/local/development/deployment/directory/email-bindingcomponent',
             'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
