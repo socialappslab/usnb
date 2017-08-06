@@ -32,7 +32,7 @@ module.exports = {
             'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/entity-manager.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'production',
-                RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
+                RABBITMQ: 'amqp://admin:admin@127.0.0.1:5672',
                 USNB_ENTITY_MANAGER_PORT: 3024,
                 USNB_MONGO_URI_ENTITY_MANAGER: 'mongodb://localhost:27017/entitymanager',
             }
@@ -46,7 +46,7 @@ module.exports = {
             'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/entity-manager.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
-                RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
+                RABBITMQ: 'amqp://admin:admin@127.0.0.1:5672',
                 USNB_ENTITY_MANAGER_PORT: 3024,
                 USNB_MONGO_URI_ENTITY_MANAGER: 'mongodb://localhost:27017/entitymanager',
             }

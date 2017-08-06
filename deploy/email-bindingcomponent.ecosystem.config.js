@@ -32,7 +32,7 @@ module.exports = {
             'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'production',
-                RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
+                RABBITMQ: 'amqp://admin:admin@127.0.0.1:5672',
                 USNB_EMAIL_PERSONA_PORT: 3026,
                 USNB_EMAIL_HOST: 'smtp.gmail.com',
                 USNB_EMAIL_PORT: 465,
@@ -50,7 +50,7 @@ module.exports = {
             'post-deploy': 'npm install && npm install git+https://gitlab.inria.fr/usnb/message-transformer && pm2 reload /path/to/local/deploy/scripts/email-bindingcomponent.ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'development',
-                RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
+                RABBITMQ: 'amqp://admin:admin@127.0.0.1:5672',
                 USNB_EMAIL_PERSONA_PORT: 3026,
                 USNB_EMAIL_HOST: 'smtp.gmail.com',
                 USNB_EMAIL_PORT: 465,

@@ -34,7 +34,7 @@ module.exports = {
             env: {
                 NODE_ENV: 'production',
 
-                RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
+                RABBITMQ: 'amqp://admin:admin@127.0.0.1:5672',
 
                 USNB_FACEBOOK_PERSONA_PORT: 3027,
                 USNB_FACEBOOK_PERSONA_EXCHANGE: 'facebookmessenger',
@@ -52,7 +52,7 @@ module.exports = {
             env: {
                 NODE_ENV: 'development',
 
-                RABBITMQ: 'amqp://admin:admin@127.0.0.721:5672',
+                RABBITMQ: 'amqp://admin:admin@127.0.0.1:5672',
 
                 USNB_FACEBOOK_PERSONA_PORT: 3027,
                 USNB_FACEBOOK_PERSONA_EXCHANGE: 'facebookmessenger',
