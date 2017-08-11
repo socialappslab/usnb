@@ -10,7 +10,7 @@ USNB is a set of service components. You can use one or more of the following se
 * [Facebook Binding Component (Messenger Platform)](https://gitlab.inria.fr/usnb/facebook-bc-bot-appcivist): sends messages to facebook using messenger platform
 * [Email Binding Component](https://gitlab.inria.fr/usnb/email-bc): send messages via emails
 
-![Components of the Universal Social Network Bus ](https://drive.google.com/file/d/0B7ShzcEnCJFNREZhN0JYM3FLakVpaUtjd0Zyc1hURGVuUVlv/view?usp=sharing)
+![Components of the Universal Social Network Bus ](docs/usnb.png)
 
 
 This README contains the necessary steps to get the USNB up and running.
